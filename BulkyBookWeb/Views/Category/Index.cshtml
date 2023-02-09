@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    @if(TempData["success"]!=null)
+    {
+        <h2 class="alert-success">@TempData["success"]</h2>
+    }
+}
+<h1>Index Category</h1>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Category
+            </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Category" class="btn btn-primary" asp-action="Create">
+                <i class="bi bi-file-plus">
+                    Create New Category
+                </i>
+            </a>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Category Name
+            </th>
+            <th>
+                Display Order
+            </th>
+            <th>
+
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var obj in Model)
+            {
+                <tr>
+                    <td>
+                        @obj.Name
+                    </td>
+                    <td width="30%">
+                        @obj.DisplayOrder
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Category" class="btn btn-primary mb-2" asp-action="Edit" asp-route-id="@obj.Id">
+                                <i class="bi bi-pen"></i>
+                            </a>
+                            <a asp-controller="Category" class="btn btn-danger mb-2" asp-action="Delete" asp-route-id="@obj.Id">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
